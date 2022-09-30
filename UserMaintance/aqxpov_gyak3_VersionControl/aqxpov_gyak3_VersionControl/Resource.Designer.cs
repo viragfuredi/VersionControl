@@ -72,18 +72,18 @@ namespace aqxpov_gyak3_VersionControl {
         /// <summary>
         ///   Looks up a localized string similar to string.
         /// </summary>
-        public static string LastName {
+        public static string Fájlba_írás {
             get {
-                return ResourceManager.GetString("LastName", resourceCulture);
+                return ResourceManager.GetString("Fájlba írás", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to string.
         /// </summary>
-        public static string Utónév {
+        public static string FullName {
             get {
-                return ResourceManager.GetString("Utónév", resourceCulture);
+                return ResourceManager.GetString("FullName", resourceCulture);
             }
         }
     }
