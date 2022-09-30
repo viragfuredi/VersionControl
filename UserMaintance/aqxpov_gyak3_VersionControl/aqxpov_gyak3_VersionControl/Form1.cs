@@ -15,6 +15,14 @@ namespace aqxpov_gyak3_VersionControl
         public Form1()
         {
             InitializeComponent();
+            label1.Text = Resource.LastName;
+            label2.Text = Resource.FirstName;
+            button1.Text = Resource.Add;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
