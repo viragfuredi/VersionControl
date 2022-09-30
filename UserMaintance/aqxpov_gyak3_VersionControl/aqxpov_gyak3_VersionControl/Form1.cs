@@ -1,4 +1,5 @@
-﻿using System;
+﻿using aqxpov_gyak3_VersionControl.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +13,18 @@ namespace aqxpov_gyak3_VersionControl
 {
     public partial class Form1 : Form
     {
+        BindingList<User> users = new BindingList<User>();
         public Form1()
         {
             InitializeComponent();
             label1.Text = Resource.LastName;
             label2.Text = Resource.FirstName;
             button1.Text = Resource.Add;
+
+
+            listBox1.DataSource = users;
+            listBox1.ValueMember = "ID";
+            listBox1.DisplayMember = "FullName";
         }
 
         private void Form1_Load(object sender, EventArgs e)
