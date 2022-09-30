@@ -18,7 +18,7 @@ namespace aqxpov_gyak3_VersionControl
         {
             InitializeComponent();
             label1.Text = Resource.LastName;
-            label2.Text = Resource.FirstName;
+            label2.Text = Resource.Utónév;
             button1.Text = Resource.Add;
 
 
@@ -37,7 +37,7 @@ namespace aqxpov_gyak3_VersionControl
             var u = new User()
             {
                 LastName = textBox1.Text,
-                FirstName = textBox2.Text
+                Utónév = textBox2.Text
             };
             users.Add(u);
         }

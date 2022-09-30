@@ -9,7 +9,7 @@ namespace aqxpov_gyak3_VersionControl.Entities
     class User
     {
         public Guid ID { get; set; } = Guid.NewGuid();
-        public string FirstName { get; set; }
+        public string Utónév { get; set; }
         public string LastName { get; set; }
         public string FullName
         {
@@ -18,7 +18,7 @@ namespace aqxpov_gyak3_VersionControl.Entities
                 return string.Format(
                     "{0} {1}",
                     LastName,
-                    FirstName);
+                    Utónév);
             }
         }
     }
