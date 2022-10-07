@@ -17,7 +17,8 @@ namespace aqxpov_gyak04
         RealEstateEntities context = new RealEstateEntities();
         List<Flat> Flats;
 
-        
+
+
         Excel.Application xlApp;
         Excel.Workbook xlWB;
         Excel.Worksheet xlSheet;
@@ -26,6 +27,8 @@ namespace aqxpov_gyak04
         public Form1()
         {
             InitializeComponent();
+            LoadData();
+            CreateExcel();
         }
 
         private void LoadData()
@@ -62,7 +65,8 @@ namespace aqxpov_gyak04
 
         private void CreateTable()
         {
-            string[] headers = new string[] {
+            string[] headers = new string[]
+            {
                "Kód",
                "Eladó",
                "Oldal",
@@ -71,24 +75,88 @@ namespace aqxpov_gyak04
                "Szobák száma",
                "Alapterület (m2)",
                "Ár (mFt)",
-               "Négyzetméter ár (Ft/m2)"};
-             }
-     //   for (int counter = 0; counter<9; counter++)
-		//	{
-        //  foreach (Flat f in Flats)
-        //    {
-        //    values[counter, 0] = f.Code;
-        //    values[counter, 1] = f.Vendor;
-        //    values[counter, 2] = f.Side;
-        //    values[counter, 3] = f.District;
-        //    values[counter, 4] = f.Elevator;
-        //    values[counter, 5] = f.NumberOfRooms;
-        //    values[counter, 6] = f.FloorArea;
-        //    values[counter, 7] = f.Price;
-        //    values[counter, 8] = "";
-        //   counter++;
-        //   }
-}
+               "Négyzetméter ár (Ft/m2)"
+            };
+
+            for (int i = 0; i < headers.Length; i++)
+
+            {
+                xlSheet.Cells[1, 1 + i] = headers[i];
+            }
+
+            object[,] values = new object[Flats.Count, headers.Length];
+
+
+            int counter = 0;
+            foreach (Flat x in Flats)
+            {
+                values[counter, 0] = x.Code;
+                values[counter, 1] = x.Vendor;
+                values[counter, 2] = x.Side;
+                values[counter, 3] = x.District;
+                values[counter, 4] = x.Elevator;
+                values[counter, 5] = x.NumberOfRooms;
+                values[counter, 6] = x.FloorArea;
+                values[counter, 7] = x.Price.ToString();
+                values[counter, 8] = "";
+                counter++;
+            }
+
+            
+
+            xlSheet.get_Range(
+                GetCell(2, 1),
+                GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+
+            FormatTable();
+
+        }
+
+        void FormatTable()
+        {
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1,9));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+
+            Excel.Range tableRange = xlSheet.get_Range(GetCell(2, 9), GetCell(2, 9));
+            tableRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range thirdRange = xlSheet.get_Range(GetCell(2, 8), GetCell(2, 9));
+            thirdRange.Interior.Color = Color.LightGoldenrodYellow;
+
+            Excel.Range fourthRange = xlSheet.get_Range(GetCell(8, 9), GetCell(8, 9));
+            fourthRange.Interior.Color = Color.LightSeaGreen;
+            
+
+
+
+        }
+
+        private string GetCell(int x, int y)
+        {
+            string ExcelCoordinate = "";
+            int dividend = y;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                ExcelCoordinate = Convert.ToChar(65 + modulo).ToString() + ExcelCoordinate;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+            ExcelCoordinate += x.ToString();
+
+            return ExcelCoordinate;
+        }
+
+        
+    }
         
 
    
