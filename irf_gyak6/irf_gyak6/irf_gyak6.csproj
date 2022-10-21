@@ -120,6 +120,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\MnbServiceReference\MNBArfolyamServiceSoapImpl.wsdl" />
+    <None Include="Properties\DataSources\irf_gyak6.Entities.RateData.datasource" />
     <None Include="Properties\DataSources\irf_gyak6.MnbServiceReference.MNBArfolyamServiceSoap.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

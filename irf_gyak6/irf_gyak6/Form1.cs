@@ -21,29 +21,14 @@ namespace irf_gyak6
         public Form1()
         {
             InitializeComponent();
-        }
-        private string DataCall()
-        {
-            var mnbService = new MNBArfolyamServiceSoapClient();
 
-            var request = new GetExchangeRatesRequestBody()
-            {
-                currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
-            };
-
-            var response = mnbService.GetExchangeRates(request);
-
-            var result = response.GetExchangeRatesResult;
-            return result;
+            RefreshData();
         }
 
         private void Xml()
         {
             var xml = new XmlDocument();
             xml.LoadXml(result);
-
 
             foreach (XmlElement element in xml.DocumentElement)
             {
@@ -62,17 +47,17 @@ namespace irf_gyak6
             }
         }
 
-            private void RefreshData()
-            {
-                Rates.Clear();
-                dataGridView1.DataSource = Rates;
-                DataCall();
-                Xml();
-                BuildChart();
-            }
+        private void RefreshData()
+        {
+            Rates.Clear();
+            dataGridView1.DataSource = Rates;
+            DataCall();
+            Xml();
+            BuildChart();
+        }
 
-            private void BuildChart()
-            {
+        private void BuildChart()
+        {
             chartRateData.DataSource = Rates;
 
             var series = chartRateData.Series[0];
@@ -90,15 +75,38 @@ namespace irf_gyak6
             chartArea.AxisY.IsStartedFromZero = false;
         }
 
-           
+        private string DataCall()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var request = new GetExchangeRatesRequestBody()
+            {
+                currencyNames = "EUR",
+                startDate = "2020-01-01",
+                endDate = "2020-06-30"
+            };
+
+            var response = mnbService.GetExchangeRates(request);
+
+            var result = response.GetExchangeRatesResult;
+            return result;
+            
+        }
+
+                       
             private void Form1_Load(object sender, EventArgs e)
         {
-           
+            DataCall();
         }
 
         private void chart1_Click(object sender, EventArgs e)
         {
+            RefreshData();
+        }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
     }
