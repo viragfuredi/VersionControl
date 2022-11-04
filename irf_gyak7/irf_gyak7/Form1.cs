@@ -103,6 +103,15 @@ namespace irf_gyak7
             button.BackColor = colorPicker.Color;
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                PresentColor = button2.BackColor
+            };
+
+        }
     }
 }
 
