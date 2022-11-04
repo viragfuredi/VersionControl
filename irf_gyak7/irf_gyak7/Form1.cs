@@ -21,7 +21,8 @@ namespace irf_gyak7
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { 
+            set
+            {
                 _factory = value;
                 DisplayNext();
 
@@ -84,7 +85,11 @@ namespace irf_gyak7
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory
+            {
+                BallColor = button2.BackColor
+            };
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -100,3 +105,4 @@ namespace irf_gyak7
         }
     }
 }
+
