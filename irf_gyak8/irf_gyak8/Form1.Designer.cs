@@ -31,17 +31,19 @@ namespace irf_gyak8
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.portfolioDataSet = new irf_gyak8.PortfolioDataSet();
-            this.tickBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tickTableAdapter = new irf_gyak8.PortfolioDataSetTableAdapters.TickTableAdapter();
             this.tickidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.indexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tradingDayDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.volumeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tickBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.portfolioDataSet = new irf_gyak8.PortfolioDataSet();
+            this.tickTableAdapter = new irf_gyak8.PortfolioDataSetTableAdapters.TickTableAdapter();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.portfolioDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.portfolioDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -59,20 +61,6 @@ namespace irf_gyak8
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(545, 452);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // portfolioDataSet
-            // 
-            this.portfolioDataSet.DataSetName = "PortfolioDataSet";
-            this.portfolioDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tickBindingSource
-            // 
-            this.tickBindingSource.DataMember = "Tick";
-            this.tickBindingSource.DataSource = this.portfolioDataSet;
-            // 
-            // tickTableAdapter
-            // 
-            this.tickTableAdapter.ClearBeforeFill = true;
             // 
             // tickidDataGridViewTextBoxColumn
             // 
@@ -105,18 +93,42 @@ namespace irf_gyak8
             this.volumeDataGridViewTextBoxColumn.HeaderText = "Volume";
             this.volumeDataGridViewTextBoxColumn.Name = "volumeDataGridViewTextBoxColumn";
             // 
+            // tickBindingSource
+            // 
+            this.tickBindingSource.DataMember = "Tick";
+            this.tickBindingSource.DataSource = this.portfolioDataSet;
+            // 
+            // portfolioDataSet
+            // 
+            this.portfolioDataSet.DataSetName = "PortfolioDataSet";
+            this.portfolioDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tickTableAdapter
+            // 
+            this.tickTableAdapter.ClearBeforeFill = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(548, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(253, 452);
+            this.dataGridView2.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.portfolioDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.portfolioDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -132,6 +144,7 @@ namespace irf_gyak8
         private System.Windows.Forms.DataGridViewTextBoxColumn tradingDayDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn volumeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
 
