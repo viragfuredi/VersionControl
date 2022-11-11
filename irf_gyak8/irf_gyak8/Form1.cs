@@ -31,7 +31,24 @@ namespace irf_gyak8
             Portfolio.Add(new PortfolioItem() { Index = "ELMO", Volume = 10 });
 
             dataGridView2.DataSource = Portfolio;
+
+            
         }
+        private decimal GetPortfolioValue(DateTime date)
+        {
+            decimal value = 0;
+            foreach (var item in Portfolio)
+            {
+                var last = (from x in Ticks
+                            where item.Index == x.Index.Trim()
+                            && date <= x.TradingDay
+                            select x)
+                            .First();
+                value += (decimal)last.Price * item.Volume;
+            }
+            return 0;
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
