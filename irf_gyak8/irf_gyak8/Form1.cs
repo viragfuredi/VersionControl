@@ -16,9 +16,7 @@ namespace irf_gyak8
     {
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
-        List<PortfolioItem> Portfolio = new List<PortfolioItem>();
-
-        
+        List<PortfolioItem> Portfolio = new List<PortfolioItem>(); 
 
         public Form1()
         {
@@ -26,8 +24,6 @@ namespace irf_gyak8
             CreatePortfolio();
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
-
-            
 
         }
 
@@ -38,19 +34,12 @@ namespace irf_gyak8
             Portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
 
             dataGridView2.DataSource = Portfolio;
-
-            
         }
-
-        
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'portfolioDataSet.Tick' table. You can move, or remove it, as needed.
             this.tickTableAdapter.Fill(this.portfolioDataSet.Tick);
-
-           
 
             List<decimal> Nyereségek = new List<decimal>();
             int idointervalum = 30;
@@ -70,7 +59,6 @@ namespace irf_gyak8
                                       select x)
                                       .ToList();
             MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
-
             
         }
 
