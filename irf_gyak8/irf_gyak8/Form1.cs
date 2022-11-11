@@ -12,7 +12,7 @@ namespace irf_gyak8
 {
     public partial class Form1 : Form
     {
-        PortfolioDataSet context = new PortfolioDataSet();
+        PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
         public Form1()
         {
