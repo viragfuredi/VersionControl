@@ -16,24 +16,59 @@ namespace irf_gyak8
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
         List<PortfolioItem> Portfolio = new List<PortfolioItem>();
+
+        
+
         public Form1()
         {
             InitializeComponent();
             CreatePortfolio();
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
+
+           
         }
 
         private void CreatePortfolio()
         {
             Portfolio.Add(new PortfolioItem() { Index = "OTP", Volume = 10 });
             Portfolio.Add(new PortfolioItem() { Index = "ZWACK", Volume = 10 });
-            Portfolio.Add(new PortfolioItem() { Index = "ELMO", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
 
             dataGridView2.DataSource = Portfolio;
 
-            
         }
+
+        
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'portfolioDataSet.Tick' table. You can move, or remove it, as needed.
+            this.tickTableAdapter.Fill(this.portfolioDataSet.Tick);
+
+           
+
+            List<decimal> Nyereségek = new List<decimal>();
+            int idointervalum = 30;
+            DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
+            DateTime záróDátum = new DateTime(2016, 12, 30);
+            TimeSpan z = záróDátum - kezdőDátum;
+            for (int i = 0; i < z.Days - idointervalum; i++)
+            {
+                decimal ny = GetPortfolioValue(kezdőDátum.AddDays(i + idointervalum))
+                           - GetPortfolioValue(kezdőDátum.AddDays(i));
+                Nyereségek.Add(ny);
+                Console.WriteLine(i + " " + ny);
+            }
+
+            var nyereségekRendezve = (from x in Nyereségek
+                                      orderby x
+                                      select x)
+                                      .ToList();
+            MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
+        }
+
         private decimal GetPortfolioValue(DateTime date)
         {
             decimal value = 0;
@@ -45,16 +80,11 @@ namespace irf_gyak8
                             select x)
                             .First();
                 value += (decimal)last.Price * item.Volume;
+                
             }
-            return 0;
+            return value;
         }
 
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'portfolioDataSet.Tick' table. You can move, or remove it, as needed.
-            this.tickTableAdapter.Fill(this.portfolioDataSet.Tick);
-
-        }
+       
     }
 }
