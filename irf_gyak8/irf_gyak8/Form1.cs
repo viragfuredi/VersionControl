@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,8 @@ namespace irf_gyak8
             Ticks = context.Ticks.ToList();
             dataGridView1.DataSource = Ticks;
 
-           
+            
+
         }
 
         private void CreatePortfolio()
@@ -37,6 +39,7 @@ namespace irf_gyak8
 
             dataGridView2.DataSource = Portfolio;
 
+            
         }
 
         
@@ -67,6 +70,8 @@ namespace irf_gyak8
                                       select x)
                                       .ToList();
             MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
+
+            
         }
 
         private decimal GetPortfolioValue(DateTime date)
@@ -85,6 +90,24 @@ namespace irf_gyak8
             return value;
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter write = new StreamWriter(save.FileName, false, Encoding.UTF8))
+                {
+                    write.Write("Időszak" +";"+ "Nyereség");
+                    foreach (var y in Ticks)
+                    {
+
+                        write.Write(y.TradingDay.ToString());
+                        write.Write(";");
+                        write.Write(y.Price.ToString());
+                        write.WriteLine();
+                    }
+                }
+            }
+        }
     }
 }
