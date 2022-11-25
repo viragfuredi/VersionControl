@@ -68,6 +68,27 @@ namespace UnitTestExample
                 password,
                  @".{8}[a-z]+[A-Z]+[0-9]");
         }
+
+        [Test,
+         TestCase("irf@uni-corvinus.hu", "Abcd1234"),
+         TestCase("irf@uni-corvinus.hu", "Abcd1234567"),
+        ]
+        public void TestRegisterHappyPath(string email, string password)
+        {
+            //arrange
+
+            var accountController = new AccountController();
+
+            //act
+
+            var actualResult = accountController.Register(email, password);
+
+            //assert
+
+            Assert.AreEqual(email, actualResult.Email);
+            Assert.AreEqual(password, actualResult.Password);
+            Assert.AreNotEqual(Guid.Empty, actualResult.ID);
+        }
     }
 
 }
