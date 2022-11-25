@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnitTestExample.Controllers;
 
@@ -53,7 +54,20 @@ namespace UnitTestExample
 
             Assert.AreEqual(expectedResult, actualResult);
         }
-        
+
+        public bool RegexHívóVarázslóEmail(string email)
+        {
+            return Regex.IsMatch(
+                email,
+                @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+        }
+
+        public bool RegexHívóVarázslóJelszó(string password)
+        {
+            return Regex.IsMatch(
+                password,
+                 @".{8}[a-z]+[A-Z]+[0-9]");
+        }
     }
 
 }
