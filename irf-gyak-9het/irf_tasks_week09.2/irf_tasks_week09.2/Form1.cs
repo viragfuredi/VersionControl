@@ -25,6 +25,8 @@ namespace irf_tasks_week09._2
             Population = GetPopulation(@"C:\Temp\nép.csv");
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
+
+            Random rng = new Random(1234);
         }
 
         public List<Person> GetPopulation(string csvpath)
